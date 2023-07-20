@@ -1,0 +1,77 @@
+version: 2
+
+sources:
+  - name: deel_raw_data
+    database: raw-data-393419  
+    #Assuming we have a last_sync date and we are pulling the data from the Globalpay API, I recommend to test the source freshness based on the sync periods.
+    #freshness:
+        #warn_after: {count: 12, period: hour}
+        #error_after: {count: 24, period: hour}
+    #loaded_at_field: sync_date
+
+    tables:
+      - name: globalpay_acceptance_report
+        description: "Table containing the acceptance report data from GlobalPay"
+        columns:
+          - name: external_ref
+            description: "External reference for the transaction"
+            tests:
+              - not_null
+              - unique
+          - name: status
+            description: "Status of the transaction"
+            tests: 
+              - not_null
+          - name: source
+            description: "Source of the transaction"
+            tests:
+              - not_null
+          - name: ref
+            description: "Reference for the transaction"
+            tests:
+              - not_null
+              - unique
+          - name: date_time
+            description: "Date and time of the transaction"
+            tests:
+              - not_null
+          - name: state
+            description: "State of the transaction"
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['ACCEPTED', 'DECLINED']
+          - name: cvv_provided
+            description: "Indicates whether CVV was provided during the transaction"
+          - name: amount
+            description: "Amount of the transaction"
+          - name: country
+            description: "Country of the transaction"
+          - name: currency
+            description: "Currency used in the transaction"
+          - name: rates
+            description: "Rates related to the transaction"
+
+      - name: globepay_chargeback_report
+        description: "Table containing the chargeback report data from GlobalPay"
+        columns:
+          - name: external_ref
+            description: "External reference for the transaction"
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                  to: source('deel_raw_data', 'globalpay_acceptance_report')
+                  field: external_ref
+          - name: status
+            description: "Status of the transaction"
+            tests: 
+              - not_null
+          - name: source
+            description: "Source of the chargeback"
+            tests: 
+              - not_null
+          - name: chargeback
+            description: "Chargeback information associated with the transaction"
+            tests: 
+              - not_null
