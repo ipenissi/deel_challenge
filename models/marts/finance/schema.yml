@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: acceptance_rate_by_day
+    description: |-
+      The acceptance_rate table contains information about the acceptance rate of transactions over time.
+      It calculates the percentage of accepted transactions compared to the total number of transactions on each day.
+    columns:
+      - name: transaction_date
+        description: The date of the transaction.
+      - name: acceptance_rate
+        description: The acceptance rate of transactions on each day, represented as a decimal value.
+
+  - name: countries_over_25m_in_rejected_transactions
+    description: |-
+      The countries_over_25m_in_rejected_transactions table lists countries where the amount of declined transactions went over $25M.
+    columns:
+      - name: country
+        description: The country where the declined transactions occurred.
+      - name: total_declined_amount
+        description: The total amount of declined transactions in the country, which went over $25M.
+
+  - name: trx_with_missing_chargeback
+    description: |-
+      The missing_chargeback_data table contains that do not have corresponding chargeback information.
+    columns:
+      - name: external_ref
+        description: A unique reference identifier for each transaction.
+      - name: status
+        description: The status of the transaction
+      - name: source
+        description: The source of the transaction (e.g., the platform or channel from which the transaction originated).
+      - name: ref
+        description: A reference or identifier associated with the transaction.
+      - name: date_time
+        description: The date and time of the transaction.
+      - name: state
+        description: The state or condition of the transaction. (e.g., 'accepted' or 'approved').
+      - name: cvv_provided
+        description: Indicates whether the CVV (Card Verification Value) was provided for the transaction.
+      - name: amount
+        description: The amount of the transaction.
+      - name: country
+        description: The country where the transaction occurred.
+      - name: currency
+        description: The currency used for the transaction.
