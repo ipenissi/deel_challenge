@@ -64,3 +64,4 @@ All the models are documented in the shcema.yml files.
 
 Note: For the project I used BigQuery as datawarehouse connected to DBT cloud.
 
+I didn't include any macro because I believe that in this case it doesn't worth it, however I used jinja in the `stg_globalpay_acceptance_report` model
