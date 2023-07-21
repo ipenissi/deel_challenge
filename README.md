@@ -17,7 +17,7 @@ We want to answer the following questions:
 2. List the countries where the amount of declined transactions went over $25M
 3. Which transactions are missing chargeback data?
 
-Key Insights
+### Key Insights
 
 During the preliminary data exploration, I saw that the data from both the GlobalPay Acceptance Report and the GlobalPay Chargeback Report is relatively clean and well-structured. The absence of significant data anomalies, missing numbers, or discrepancies indicates that GlobalPay has a strong data management procedure in place. This cleanliness is critical because it provides a strong foundation for developing reliable data models and performing correct analyses.
 
@@ -29,9 +29,7 @@ The acceptance rate has been quite consistent in the time span given, with a sim
 
 At the moment, no transactions have a missing chargeback.
 
-## 2. Summary of Model Architecture
-
-Model Descriptions
+## 2. Model Descriptions
 
 The staging schema contains the tables that get data from the source tables directly. Some tests are running at that layer to ensure that the data is valid and trustworthy.
 
@@ -52,19 +50,15 @@ All the models are documented in the shcema.yml files.
 
 ### acceptance_rate_over_time:
 
-
+![1](1.png)
 
 ### countries_over_25m_in_rejected_transactions:
 
-
-
+![2](2.png)
 
 ### trx_with_missing_chargeback:
 
-
-
-
-
+![3](3.png)
 
 
 
